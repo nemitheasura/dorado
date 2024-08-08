@@ -229,7 +229,9 @@ int PolyTailCalculator::calculate_num_bases(const SimplexRead& read,
             signal_end, signal_len, num_samples_per_base, read.read_common.num_trimmed_samples,
             read.read_common.seq.length());
 
-    return num_bases;
+    // return num_bases;
+    // return a string consisting of the signal_start, signal_end, and num_bases, each separated by : 
+    return std::to_string(signal_start) + ":" + std::to_string(signal_end) + ":" + std::to_string(num_bases);
 }
 
 std::shared_ptr<const PolyTailCalculator> PolyTailCalculatorFactory::create(
