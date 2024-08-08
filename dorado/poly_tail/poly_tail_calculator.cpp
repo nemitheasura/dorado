@@ -204,7 +204,7 @@ std::pair<int, int> PolyTailCalculator::determine_signal_bounds(int signal_ancho
     return *best_interval;
 }
 
-int PolyTailCalculator::calculate_num_bases(const SimplexRead& read,
+std::string PolyTailCalculator::calculate_num_bases(const SimplexRead& read,
                                             const SignalAnchorInfo& signal_info) const {
     spdlog::trace("{} Strand {}; poly A/T signal anchor {}", read.read_common.read_id,
                   signal_info.is_fwd_strand ? '+' : '-', signal_info.signal_anchor);
