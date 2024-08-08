@@ -12,6 +12,18 @@
 #include <algorithm>
 #include <cmath>
 
+int main() {
+    // Create a file logger (will log to "app.log")
+    auto file_logger = spdlog::basic_logger_mt("file_logger", "app.log");
+    
+    // Set the log level to trace (to capture trace level messages)
+    file_logger->set_level(spdlog::level::trace);
+
+    // Make the file logger the default logger
+    spdlog::set_default_logger(file_logger);
+
+}
+
 namespace dorado::poly_tail {
 
 namespace {
@@ -222,8 +234,6 @@ int PolyTailCalculator::calculate_num_bases(const SimplexRead& read,
     int num_bases = int(std::round(static_cast<float>(signal_len) / num_samples_per_base)) -
                     signal_info.trailing_adapter_bases;
 
-    auto file_logger = spdlog::basic_logger_mt("file_logger", "logs.txt");
-    spdlog::set_default_logger(file_logger);
 
     spdlog::trace(
             "{} PolyA bases {}, signal anchor {} Signal range is {} {} Signal length "
