@@ -204,8 +204,12 @@ std::pair<int, int> PolyTailCalculator::determine_signal_bounds(int signal_ancho
     return *best_interval;
 }
 
-std::string PolyTailCalculator::calculate_num_bases(const SimplexRead& read,
+int PolyTailCalculator::calculate_num_bases(const SimplexRead& read,
                                             const SignalAnchorInfo& signal_info) const {
+    auto file_logger = spdlog::basic_logger_mt("file_logger", "logs.txt");
+
+    spdlog::set_default_logger(file_logger);
+
     spdlog::trace("{} Strand {}; poly A/T signal anchor {}", read.read_common.read_id,
                   signal_info.is_fwd_strand ? '+' : '-', signal_info.signal_anchor);
 
@@ -229,9 +233,9 @@ std::string PolyTailCalculator::calculate_num_bases(const SimplexRead& read,
             signal_end, signal_len, num_samples_per_base, read.read_common.num_trimmed_samples,
             read.read_common.seq.length());
 
-    // return num_bases;
+    return num_bases;
     // return a string consisting of the signal_start, signal_end, and num_bases, each separated by : 
-    return std::to_string(signal_start) + ":" + std::to_string(signal_end) + ":" + std::to_string(num_bases);
+    // return std::to_string(signal_start) + ":" + std::to_string(signal_end) + ":" + std::to_string(num_bases);
 }
 
 std::shared_ptr<const PolyTailCalculator> PolyTailCalculatorFactory::create(
