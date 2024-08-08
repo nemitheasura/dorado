@@ -2,6 +2,9 @@
 
 #include "utils/sequence_utils.h"
 
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/basic_file_sink.h>
+
 #include <toml.hpp>
 #include <toml/value.hpp>
 
